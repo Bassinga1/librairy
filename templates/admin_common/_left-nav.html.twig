@@ -1,0 +1,56 @@
+<nav id="sidebar" class="sidebar js-sidebar">
+	<div class="sidebar-content js-simplebar">
+		<a class="sidebar-brand" href="{{ path('app_admin_dashboard') }}">
+			<span class="align-middle">Admin Librairie</span>
+		</a>
+
+		<ul class="sidebar-nav">
+			<li class="sidebar-header">
+				Pages
+			</li>
+
+			<li class="sidebar-item {{ dashboardActive }}">
+				<a class="sidebar-link" href="{{ path('app_admin_dashboard') }}">
+					<i class="align-middle" data-feather="sliders"></i>
+					<span class="align-middle">Dashboard</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item {{ homeActive }}">
+				<a class="sidebar-link" href="{{ path('app_admin_home_index') }}">
+					<i class="align-middle" data-feather="home"></i>
+					<span class="align-middle">Home</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item {{ carouselActive }}">
+				<a class="sidebar-link" href="{{ path('app_admin_carousel_index') }}">
+					<i class="align-middle" data-feather="image"></i>
+					<span class="align-middle">Carousel</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item {{ categorieActive }}">
+				<a class="sidebar-link" href="{{ path('app_admin_categorie_index') }}">
+					<i class="align-middle" data-feather="bookmark"></i>
+					<span class="align-middle">Catégorie</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item {{ livreActive }}">
+				<a class="sidebar-link" href="{{ path('app_admin_livre_index') }}">
+					<i class="align-middle" data-feather="book"></i>
+					<span class="align-middle">Livre</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item {{ imageActive }}">
+				<a class="sidebar-link" href="{{ path('app_admin_image_index') }}">
+					<i class="align-middle" data-feather="image"></i>
+					<span class="align-middle">Image</span>
+				</a>
+			</li>
+
+		</ul>
+	</div>
+</nav>

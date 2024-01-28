@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+    {# On rend l'intégralité du formulaire en suivant le patron (type) #}
+    {# {{ form_widget(form) }} #}
+    {# On rend les lignes de chaque propriétés #}
+    <div class="d-flex flex-wrap justify-content-between ">
+        <div class="col-12 col-md-2 d-flex align-items-center mb-3">{{ form_row(form.isActive) }}</div>
+        <div class="col-12 col-md-4">{{ form_row(form.rankNumber) }}</div>
+        <div class="col-12 col-md-6 text-end"> {{ form_row(form.tag) }}</div>
+    </div>
+    {{ form_row(form.title) }}
+    {{ form_row(form.text) }}
+    {{ form_row(form.imageFile) }}
+
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

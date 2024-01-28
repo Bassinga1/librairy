@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+{{ form_row(form.isActive) }}
+{{ form_row(form.title) }}
+{{ form_row(form.description) }}
+{{ form_row(form.price) }}
+{{ form_row(form.categorie) }}
+
+{# Embed Form #}
+{# the data-index attribute is required for the JavaScript code below #}
+<ul class="images" data-index="{{ form.images|length > 0 ? form.images|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}"> </ul>
+<div>
+    <button type="button" class="add_item_link btn btn-success mb-3" data-collection-holder-class="images">Add image</button>
+</div>
+<button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

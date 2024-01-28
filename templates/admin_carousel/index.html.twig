@@ -1,0 +1,54 @@
+{% extends 'base-be.html.twig' %}
+
+{% block title %}Carousel index{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Carousel</h1>
+        <a href="{{ path('app_admin_carousel_new') }}" class="btn btn-success">New</a>
+    </div>
+
+    <table class="table table-index table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Text</th>
+                <th>Order</th>
+                <th>Tag</th>
+                <th>Active</th>
+                <th>UpdatedAt</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for carousel in carousels %}
+            <tr>
+                <td>{{ carousel.id }}</td>
+                <td>
+                    <a href="{{ asset('images/carousel/' ~ carousel.imageName) }}" data-lightbox="{{ carousel.imageName }}" {% if carousel.title is not null %}data-title="{{ carousel.title }}" {% endif %}>
+                        <img src="{{ asset('images/carousel/' ~ carousel.imageName) }}" alt="" class="img-list">
+                    </a>
+                </td>
+                <td>{{ carousel.title }}</td>
+                <td>{{ carousel.text }}</td>
+                <td>{{ carousel.rankNumber }}</td>
+                <td>{{ carousel.tag }}</td>
+                <td>{{ carousel.isActive ? 'Yes' : 'No' }}</td>
+                <td>{{ carousel.updatedAt ? carousel.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    {{ include('admin_carousel/_delete_form.html.twig') }}
+                    <a href="{{ path('app_admin_carousel_show', {'id': carousel.id}) }}" class="btn btn-dark mb-1"><i class="align-middle" data-feather="eye"></i></a>
+                    <a href="{{ path('app_admin_carousel_edit', {'id': carousel.id}) }}" class="btn btn-warning"><i class="align-middle" data-feather="edit-2"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9"><div class="text-start">No data found in the BDD.</div></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
