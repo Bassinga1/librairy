@@ -1,0 +1,6 @@
+<ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="{{ path('app_front_categorie', { 'slug': 'categories' })}}">Toutes</a></li>
+    {% for categorie in categories %}
+        <li><a class="dropdown-item" href="{{ path('app_front_categorie', { 'slug': categorie.slug })}}">{{ categorie.name }}</a></li>
+    {% endfor %}
+</ul>

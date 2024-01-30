@@ -40,7 +40,7 @@ class Image
     // =================== MAGIC FUNCTION =================== //
     // ====================================================== //
     public function __toString():string{
-        return $this->imageName;
+        return (is_null($this->imageName)) ? "null" : $this->imageName;
     }
     // ====================================================== //
     // ===================== GETTERS/SETTERS ===================== //
