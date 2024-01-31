@@ -1,5 +1,22 @@
+@import '_variables.scss';
 body{
     background: url('../images/twinkle_twinkle.png');
+    font-family: 'Poppins', sans-serif;
+    color: $textColor;
+    @for $i from 1 through 6 {
+        h#{$i} {
+            font-family: 'Montserrat', sans-serif;
+        }
+    }
+    .signature{
+        font-weight: 300;
+    }
+    .img-30{
+        width: 30%;
+    }
+    .cursor-pointer{
+        cursor: pointer;
+    }
 }
 
 // Footer
@@ -9,6 +26,10 @@ body{
         max-width:500%;
         max-height:5px;   
 }
+
+
+
+
 
 
 

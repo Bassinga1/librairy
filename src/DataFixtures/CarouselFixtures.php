@@ -24,6 +24,13 @@ class CarouselFixtures extends Fixture
         $carousel->setImageName("carousel2.webp");
         $manager->persist($carousel);
 
+        $carousel = new Carousel();
+        $carousel->setRankNumber(3);
+        $carousel->setTag("home");
+        $carousel->setIsActive(true);
+        $carousel->setImageName("carousel3.webp");
+        $manager->persist($carousel);
+
         $manager->flush();
     }
 }

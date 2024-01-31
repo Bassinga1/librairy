@@ -31,7 +31,7 @@ class Livre
     #[ORM\Column]
     private ?bool $isActive = null;
 
-    #[ORM\OneToMany(mappedBy: 'livre', targetEntity: Image::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'livre', targetEntity: Image::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $images;
 
     #[ORM\ManyToOne(inversedBy: 'livres')]
@@ -41,17 +41,22 @@ class Livre
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
+    #[ORM\ManyToMany(targetEntity: Auteur::class, mappedBy: 'livres')]
+    private Collection $auteurs;
+
     // ====================================================== //
     // ===================== CONSTRUCTORS ===================== //
     // ====================================================== //
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->auteurs = new ArrayCollection();
     }
     // ====================================================== //
     // =================== MAGIC FUNCTION =================== //
     // ====================================================== //
-    public function __toString():string{
+    public function __toString(): string
+    {
         return $this->title;
     }
     // ====================================================== //
@@ -160,6 +165,33 @@ class Livre
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Auteur>
+     */
+    public function getAuteurs(): Collection
+    {
+        return $this->auteurs;
+    }
+
+    public function addAuteur(Auteur $auteur): static
+    {
+        if (!$this->auteurs->contains($auteur)) {
+            $this->auteurs->add($auteur);
+            $auteur->addLivre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuteur(Auteur $auteur): static
+    {
+        if ($this->auteurs->removeElement($auteur)) {
+            $auteur->removeLivre($this);
+        }
 
         return $this;
     }

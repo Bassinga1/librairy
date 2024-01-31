@@ -27,7 +27,7 @@ class LivreType extends AbstractType
             ->remove('slug')
             ->add('categorie', EntityType::class, ['class'=>Categorie::class, 'choice_label'=>'name', 'required'=>true])
             // aide : https://symfony.com/doc/current/form/form_collections.html
-            ->add('images', CollectionType::class, ['entry_type'=>ImageType::class, "allow_add"=>true, "by_reference"=>false, 'allow_delete'=>true, 'label'=>false, 'entry_options'=>['fromBook'=>true]])
+            ->add('images', CollectionType::class, ['entry_type'=>ImageType::class, "allow_add"=>true, "by_reference"=>false, 'allow_delete'=>true, 'label'=>false, 'entry_options'=>['fromBook'=>true, 'isNew'=>$options['isNew']]])
         ;
     }
 
@@ -35,7 +35,7 @@ class LivreType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Livre::class,
-            // 'isNew'=>true,
+            'isNew'=>true,
         ]);
     }
 }

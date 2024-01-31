@@ -6,14 +6,6 @@ vich_uploader:
         type: attribute
 
     mappings:
-        carousel:
-            uri_prefix: /images/carousel
-            upload_destination: "%kernel.project_dir%/public/images/carousel"
-            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
-        categorie:
-            uri_prefix: /images/categorie
-            upload_destination: "%kernel.project_dir%/public/images/categorie"
-            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
         home:
             uri_prefix: /images/home
             upload_destination: "%kernel.project_dir%/public/images/home"
@@ -22,3 +14,18 @@ vich_uploader:
             uri_prefix: /images/livre
             upload_destination: "%kernel.project_dir%/public/images/livre"
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        carousel:
+            uri_prefix: /images/carousel
+            upload_destination: "%kernel.project_dir%/public/images/carousel"
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        categorie:
+            uri_prefix: /images/categorie
+            upload_destination: "%kernel.project_dir%/public/images/categorie"
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        auteur:
+            uri_prefix: /images/auteur
+            upload_destination: "%kernel.project_dir%/public/images/auteur"
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        
+        
+        

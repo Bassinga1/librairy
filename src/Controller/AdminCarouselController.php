@@ -55,7 +55,7 @@ class AdminCarouselController extends AbstractController
     #[Route('/{id}/edit', name: 'app_admin_carousel_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Carousel $carousel, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(CarouselType::class, $carousel);
+        $form = $this->createForm(CarouselType::class, $carousel, ["isNew"=>false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

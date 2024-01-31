@@ -1,0 +1,21 @@
+{% extends 'base-be.html.twig' %}
+
+{% block title %}Edit Auteur{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_admin_auteur_index') }}" class="btn btn-dark btn-sm mb-2">back</a>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Edit</h1>
+        {{ include('admin_auteur/_delete_form.html.twig') }}
+    </div>
+
+    {{ include('admin_auteur/_form.html.twig', {'button_label': 'Update'}) }}
+    
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$('.select2').select2();
+</script>
+{% endblock %}

@@ -16,7 +16,7 @@ class ImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('imageFile', FileType::class, ['required'=>true, 'label'=>'Image', "attr"=>["class"=>"select-image"]])    
+            ->add('imageFile', FileType::class, ['required'=>$options['isNew'], 'label'=>'Image', "attr"=>["class"=>"select-image"]])    
             ->remove('imageName')
             ->remove('updatedAt')
             // L'option data permet de définir une valeur affichée par défaut
@@ -36,6 +36,7 @@ class ImageType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Image::class,
             'fromBook'=>false,
+            'isNew'=>true,
         ]);
     }
 }

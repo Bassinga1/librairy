@@ -1,20 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FrontLivreController!{% endblock %}
+{% block title %}
+	{{ livre.title }}
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<h1>{{ livre.title }}</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Applications/MAMP/htdocs/symfoproject/symfo-librairie/src/Controller/FrontLivreController.php'|file_link(0) }}">src/Controller/FrontLivreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Applications/MAMP/htdocs/symfoproject/symfo-librairie/templates/front_livre/index.html.twig'|file_link(0) }}">templates/front_livre/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<div class="row">
+		<div
+			class="col-12 col-md-3">
+			{# On vérifie si le livre a des images #}
+			{% if livre.images|length > 0 %}
+				{# On affiche la première image #}
+				<a href="{{ asset('images/livre/' ~ livre.images[0].imageName) }}" data-lightbox="{{ livre.title }}">
+					<img src="{{ asset('images/livre/' ~ livre.images[0].imageName) }}" alt="{{ livre.title }}" class="img-fluid" id="img-big">
+				</a>
+				{# On vérifie s'il y a plus d'une image dans la collection #}
+				{% if livre.images|length > 1 %}
+					<div class="row justify-content-between">
+						{% for image in livre.images %}
+							{% if loop.index0 > 0 %}
+								<div class="img-30 mt-3 cursor-pointer">
+									<img src="{{ asset('images/livre/' ~ livre.images[loop.index0].imageName) }}" alt="" class="img-fluid">
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %}
+			{% endif %}
+		</div>
+
+		<div class="col-12 col-md-9">
+			<div>{{ livre.description|raw }}</div>
+			<div>Price: {{ livre.price|format_currency('EUR') }}</div>
+		</div>
+	</div>
+
+{% endblock %}
+{% block javascripts %}
+<script>
+// On récupère les objets de classe cursor-pointer
+$('.cursor-pointer').on('click', function(e){
+    e.stopPropagation();
+    // On récupère la valeur de l'attribut src de l'image cliquée
+    let itemSource = $(this).find('img').attr('src');
+    // On récupère la valeur de l'attribut src de la grande image
+    let currentSource = $('#img-big').attr('src');
+    // On remplace l'attribut src de la grande image par celui de celle cliquée et on remplace également l'attribut href de la balise a
+    $("#img-big").attr('src', itemSource);
+    $("#img-big").parent().attr("href", itemSource);
+    // On charge le src de l'image cliquée
+    $(this).find('img').attr('src', currentSource);
+});
+</script>
 {% endblock %}

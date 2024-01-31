@@ -56,15 +56,12 @@ class AdminLivreController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_admin_livre_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Livre $livre, EntityManagerInterface $entityManager, SluggerInterface $sluggerInterface): Response
+    public function edit(Request $request, Livre $livre, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(LivreType::class, $livre);
+        $form = $this->createForm(LivreType::class, $livre, ["isNew"=>false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //On génére le slug de la catégorie car il est obligatoire et n'est pas présent dans le formulaire
-            $categorie->setSlug($sluggerInterface->slug(strtolower($categorie->getName())));
-            $entityManager->persist($livre);
             $entityManager->flush();
             // Flash méssage
             $this->addFlash('success', 'Livre has been modified!');

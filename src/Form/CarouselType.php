@@ -5,8 +5,8 @@ namespace App\Form;
 use App\Entity\Carousel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -23,7 +23,7 @@ class CarouselType extends AbstractType
             ->add('rankNumber', NumberType::class, ["required"=>true, "label"=>"order"])
             ->add('tag', TextType::class, ["required"=>true])
             ->add('isActive', CheckboxType::class, ["required"=>false, "label"=>"Active", "attr"=>["class"=>"form-check-input"], "row_attr"=>["class"=>"form-switch"]])
-            ->add('imageFile', VichImageType::class, ["required"=>true, "label"=>"Image"])
+            ->add('imageFile', FileType::class, ["required"=>$options['isNew'], "label"=>"Image"])
         ;
     }
 
@@ -31,6 +31,7 @@ class CarouselType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Carousel::class,
+            'isNew'=> true,
         ]);
     }
 }

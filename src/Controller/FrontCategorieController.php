@@ -26,7 +26,7 @@ class FrontCategorieController extends AbstractController
     {
         if($slug=="categories"){
             return $this->render('front_categorie/index.html.twig', [
-                'controller_name' => 'FrontCategorieController'
+                'categories' => $categorieRepository->findBy(["isActive"=>true], ["name"=>"ASC"])
             ]);
         }else{
             $categorie = $categorieRepository->findOneBy(["slug"=>$slug]);
