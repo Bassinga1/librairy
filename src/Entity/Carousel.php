@@ -19,7 +19,7 @@ class Carousel
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable:true)]
     private ?string $imageName = null;
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -43,13 +43,6 @@ class Carousel
 
     #[ORM\Column]
     private ?bool $isActive = null;
-
-    // ====================================================== //
-    // =================== MAGIC FUNCTION =================== //
-    // ====================================================== //
-    public function __toString():string{
-        return $this->title;
-    }
     // ====================================================== //
     // ===================== GETTERS/SETTERS ===================== //
     // ====================================================== //
@@ -63,7 +56,7 @@ class Carousel
         return $this->imageName;
     }
 
-    public function setImageName(string $imageName): static
+    public function setImageName(?string $imageName): static
     {
         $this->imageName = $imageName;
 

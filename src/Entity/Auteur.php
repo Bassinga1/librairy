@@ -52,6 +52,8 @@ class Auteur
     #[ORM\ManyToMany(targetEntity: Livre::class, inversedBy: 'auteurs')]
     private Collection $livres;
 
+    private ?string $auteurName = null;
+
     // ====================================================== //
     // =================== CONSTRUCTORS =================== //
     // ====================================================== //
@@ -197,6 +199,37 @@ class Auteur
     public function removeLivre(Livre $livre): static
     {
         $this->livres->removeElement($livre);
+
+        return $this;
+    }
+
+    /**
+     * Get the value of auteurName
+     */ 
+    public function getAuteurName()
+    {
+        if(!is_null($this->pseudo)){
+            $this->auteurName = $this->pseudo;
+        }else{
+            $this->auteurName = "";
+            if(!is_null($this->lastname)){
+                $this->auteurName = $this->lastname;
+            }
+            if(!is_null($this->name)){
+                $this->auteurName .= " ".$this->name;
+            }
+        }
+        return trim($this->auteurName);
+    }
+
+    /**
+     * Set the value of auteurName
+     *
+     * @return  self
+     */ 
+    public function setAuteurName($auteurName)
+    {
+        $this->auteurName = $auteurName;
 
         return $this;
     }

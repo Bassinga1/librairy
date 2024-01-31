@@ -34,6 +34,14 @@
 
 		<div class="col-12 col-md-9">
 			<div>{{ livre.description|raw }}</div>
+			<div>
+				<h2 class="my-3">Auteur(s)</h2>
+				<ul>
+					{% for auteur in livre.auteurs %}
+					<li><a href="{{ path('app_front_auteur_show', {slug: auteur.slug}) }}">{{ auteur.auteurName }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
 			<div>Price: {{ livre.price|format_currency('EUR') }}</div>
 		</div>
 	</div>

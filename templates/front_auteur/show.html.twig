@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ auteur.imageName }}{% endblock %}
+
+{% block body %}
+{# {{ dump(auteur) }} #}
+<h1>{{ auteur.Name }}</h1>
+<div class="row">
+    <div class="col-12 col-md-3">
+        {% set image = auteur.imageName %}
+        {% if auteur.imageName is null %}
+        {% set image = "default.jpg" %}
+        {% endif %}
+        <img src="{{ asset('images/auteur/' ~ image) }}" alt="{{ auteur.auteurName }}" class="img-fluid">
+    </div>
+    <div class="col-12 col-md-3">
+        <h2>Biography</h2>
+        {% if auteur.biography is not null %}
+        {{ auteur.biography|raw }}
+        {% else %}
+        <p class="text-muted">No biography available yet for this auteur.</p>
+        {% endif %}
+    </div>
+</div>
+<h2>Books of {{ auteur.auteurName }}</h2>
+<div class="row">
+{% for livre in auteur.livres %}
+    <div class="col-6 col-md-3 ">
+        <div class="p-3 mx-3 bg-secondary text-center rounded">
+            <p>{{ livre.title }}</p>
+            {% if livre.images|length > 0 %}
+            <img src="{{ asset('images/livre/' ~ livre.images[0].imageName) }}" alt="{{ livre.title }}" class="img-fluid">
+            {% else %}
+            <img src="{{ asset('images/livre/default.jpg') }}" alt="{{ livre.title }}" class="img-fluid">
+            {% endif %}
+            <a href="{{ path('app_front_livre', {slug: livre.slug} ) }}" class="btn btn-dark mt-3">See</a>
+        </div>    
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

@@ -35,21 +35,19 @@ class AdminAuteurController extends AbstractController
             if(!is_null($auteur->getPseudo())){
                 $auteur->setSlug(strtolower($sluggerInterface->slug($auteur->getPseudo())));
             }else{
-                $auteur = "";
+                $auteurName = "";
                 if(!is_null($auteur->getLastname())){
-                    $auteurName = strtolower($auteur.getLastname());
+                    $auteurName = strtolower($auteur->getLastname());
                 }
                 if(!is_null($auteur->getName())){
-                    $auteurName .= " ".strtolower($auteur.getName());
+                    $auteurName .= " ".strtolower($auteur->getName());
                 }
                 $auteur->setSlug($sluggerInterface->slug(trim($auteurName)));
             }
-            // Mise en place du message flash
-            // $this->addFlash('success', 'auteur has been created!');
+            // Mise en place du message
+            $this->addFlash("success", "Auteur has been created");
             $entityManager->persist($auteur);
             $entityManager->flush();
-            // Flash méssage
-            $this->addFlash('success', 'auteur has been created!');
 
             return $this->redirectToRoute('app_admin_auteur_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -79,21 +77,19 @@ class AdminAuteurController extends AbstractController
             if(!is_null($auteur->getPseudo())){
                 $auteur->setSlug(strtolower($sluggerInterface->slug($auteur->getPseudo())));
             }else{
-                $auteur = "";
+                $auteurName = "";
                 if(!is_null($auteur->getLastname())){
-                    $auteurName = strtolower($auteur.getLastname());
+                    $auteurName = strtolower($auteur->getLastname());
                 }
                 if(!is_null($auteur->getName())){
-                    $auteurName .= " ".strtolower($auteur.getName());
+                    $auteurName .= " ".strtolower($auteur->getName());
                 }
                 $auteur->setSlug($sluggerInterface->slug(trim($auteurName)));
             }
-            // Mise en place du message flash
-            // $this->addFlash('success', 'auteur has been modified!');
+            // Mise en place du message
+            $this->addFlash("success", "Auteur has been modified");
             $entityManager->persist($auteur);
             $entityManager->flush();
-            // Flash méssage
-            $this->addFlash('success', 'auteur has been modified!');
 
             return $this->redirectToRoute('app_admin_auteur_index', [], Response::HTTP_SEE_OTHER);
         }

@@ -14,16 +14,29 @@
                     {{ render(controller('App\\Controller\\FrontCategorieController::renderCategorieDropDown')) }}
                 </li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Auteurs</a>
+					<a class="nav-link" href="{{ path('app_front_auteur') }}">Auteurs</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Contact</a>
 				</li>
 				<li class="nav-item ms-lg-auto">
-					<a class="nav-link" href="#">Inscription</a>
+					{% if app.user is null %}
+					<a class="nav-link" href="{{ path('app_register') }}">SignUp</a>
+					{% else %}
+					<a class="nav-link" href="#">MyAccount</a>
+					{% endif %}
 				</li>
+				{% if is_granted("ROLE_ADMIN") %}
 				<li class="nav-item">
-					<a class="nav-link" href="#">Connexion</a>
+					<a class="nav-link" href="{{ path('app_logout') }}">Admin</a>
+				</li>
+				{% endif %}
+				<li class="nav-item">
+					{% if is_granted("ROLE_USER") %}
+					<a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+					{% else %}
+					<a class="nav-link" href="{{ path('app_login') }}">SignIn</a>
+					{% endif %}
 				</li>
 			</ul>
 		</div>
