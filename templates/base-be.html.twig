@@ -6,6 +6,7 @@
 {% set homeActive = "" %}
 {% set imageActive = "" %}
 {% set livreActive = "" %}
+{% set userActive = "" %}
 
 {# On verifie si un mot est contenu dans la route (barre d'adresse) et si c'est le cas on modifie la valeur de la variable concerné #}
 {% if "auteur" in app.request.pathinfo %}
@@ -28,6 +29,9 @@
 
 {% elseif "image" in app.request.pathinfo %}
 {% set imageActive = "active" %}
+
+{% elseif "user" in app.request.pathinfo %}
+{% set userActive = "active" %}
 
 {% elseif "auteur" in app.request.pathinfo %}
 {% set auteurActive = "active" %}

@@ -44,6 +44,9 @@ class Livre
     #[ORM\ManyToMany(targetEntity: Auteur::class, mappedBy: 'livres')]
     private Collection $auteurs;
 
+    #[ORM\OneToMany(mappedBy: 'livre', targetEntity: Favori::class, orphanRemoval: true)]
+    private Collection $favoris;
+
     // ====================================================== //
     // ===================== CONSTRUCTORS ===================== //
     // ====================================================== //
@@ -51,6 +54,7 @@ class Livre
     {
         $this->images = new ArrayCollection();
         $this->auteurs = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
     }
     // ====================================================== //
     // =================== MAGIC FUNCTION =================== //
@@ -191,6 +195,36 @@ class Livre
     {
         if ($this->auteurs->removeElement($auteur)) {
             $auteur->removeLivre($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favori>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Favori $favori): static
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris->add($favori);
+            $favori->setLivre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Favori $favori): static
+    {
+        if ($this->favoris->removeElement($favori)) {
+            // set the owning side to null (unless already changed)
+            if ($favori->getLivre() === $this) {
+                $favori->setLivre(null);
+            }
         }
 
         return $this;

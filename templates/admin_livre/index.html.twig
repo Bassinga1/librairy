@@ -32,7 +32,7 @@
                 <td>
                     {{ include('admin_livre/_delete_form.html.twig') }}
                     <a href="{{ path('app_admin_livre_show', {'id': livre.id}) }}" class="btn btn-dark mb-1"><i class="align-middle" data-feather="eye"></i></a>
-                    <a href="{{ path('app_admin_livre_edit', {'id': livre.id}) }}"class="btn btn-warning"><i class="align-middle" data-feather="edit-2"></i></a>
+                    <a href="{{ path('app_admin_livre_edit', {'id': livre.id}) }}" class="btn btn-warning"><i class="align-middle" data-feather="edit-2"></i></a>
                 </td>
             </tr>
         {% else %}

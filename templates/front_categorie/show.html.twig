@@ -40,7 +40,10 @@
 					<h5 class="card-title">{{ livre.title }}</h5>
 					<div class="align-self-end">
 						<p class="card-text">{{ livre.price|format_currency('EUR') }}</p>
-						<a href="{{ path('app_front_livre', {slug: livre.slug}) }}" class="btn btn-dark">See</a>
+						<div class="d-flex flex-wrap justify-content-between w-100">
+							<a href="{{ path('app_front_livre', {slug: livre.slug}) }}" class="btn btn-dark">See</a>
+							<button class="btn btn-dark add-favori" data-livre-id="{{ livre.id }}"><i class="fa-regular fa-heart"></i></button>
+						</div>
 					</div>
 				</div>
 			</div>

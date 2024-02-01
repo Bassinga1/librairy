@@ -17,6 +17,11 @@ body{
     .cursor-pointer{
         cursor: pointer;
     }
+    .avatar{
+        max-width: 30px;
+        max-height: 30px;
+        border-radius: 50%;
+    }
 }
 
 // Footer
@@ -26,6 +31,7 @@ body{
         max-width:500%;
         max-height:5px;   
 }
+
 
 
 
