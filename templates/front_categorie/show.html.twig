@@ -14,42 +14,57 @@
 			{% set image = "default.jpg" %}
 		{% endif %}
 		<div class="col-12 col-md-3">
-			<img src="{{ asset('images/categorie/' ~ image) }}" alt="categorie illustration {{ categorie.name }}" class="img-fluid">
+			<img src="{{ asset('images/categorie/' ~ image) }}" alt="Illustration de la catégorie {{ categorie.name }}" class="img-fluid">
 		</div>
 		<div class="col-12 col-md-9">
 			{% if categorie.description is not null %}
 				{{ categorie.description|raw }}
 			{% else %}
-				<p>No description yet for this category.</p>
+				<p>Il n'y a pas encore de description pour cette catégorie.</p>
 			{% endif %}
 		</div>
 	</div>
-
-	<h2 class="mt-5">Our Books</h2>
+	<div class="d-flex flex-wrap justify-content-between align-items-center">
+		<h2 class="mt-5">Our Books
+		</h2>
+	</div>
+	<form method="post" class="d-flex">
+		<input type="search" name="search" class="form-control">
+		<button type="submit" class="btn btn-dark"></button>
+	</form>
 	<div class="row">
 		{% for livre in categorie.livres %}
-        <div class="col-12 col-md-3 col-lg-2 d-flex align-items-stretch">
-			<div class="card">
-				{% if livre.images|length > 0 %}
-                    {% set image = livre.images[0].imageName %}
-                {% else %}
-                    {% set image = "default.jpg" %}
-                {% endif %}
-                <img src="{{ asset('images/livre/' ~ image) }}" class="card-img-top" alt="{{ livre.title }}">
-				<div class="card-body d-flex flex-wrap">
-					<h5 class="card-title">{{ livre.title }}</h5>
-					<div class="align-self-end">
-						<p class="card-text">{{ livre.price|format_currency('EUR') }}</p>
-						<div class="d-flex flex-wrap justify-content-between w-100">
-							<a href="{{ path('app_front_livre', {slug: livre.slug}) }}" class="btn btn-dark">See</a>
-							<button class="btn btn-dark add-favori" data-livre-id="{{ livre.id }}"><i class="fa-regular fa-heart"></i></button>
+			<div class="col-12 col-md-3 col-lg-2 d-flex align-items-stretch">
+				<div class="card">
+					{% if livre.images|length > 0 %}
+						{% set image = livre.images[0].imageName %}
+					{% else %}
+						{% set image = "default.jpg" %}
+					{% endif %}
+					<img src="{{ asset('images/livre/' ~ image) }}" class="card-img-top" alt="{{ livre.title }}">
+					<div class="card-body d-flex flex-wrap">
+						<h5 class="card-title">{{ livre.title }}</h5>
+						<div class="align-self-end w-100">
+							<p class="card-text">{{ livre.price|format_currency('EUR') }}</p>
+							<div class="d-flex flex-wrap justify-content-between w-100">
+								<a href="{{ path('app_front_livre', {slug: livre.slug}) }}" class="btn btn-dark">See</a>
+								{% if app.user is not null %}
+									{% set isInFavori = false %}
+									{% for favori in app.user.favoris %}
+										{% if favori.livre == livre %}
+											{% set isInFavori = true %}
+										{% endif %}
+									{% endfor %}
+									<button class="btn btn-dark add-favori" data-livre-id="{{ livre.id }}">
+										<i class="{% if isInFavori == true %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+									</button>
+								{% endif %}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-        {% endfor %}
+		{% endfor %}
 	</div>
-
 
 {% endblock %}

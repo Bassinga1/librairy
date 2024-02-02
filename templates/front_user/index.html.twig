@@ -79,9 +79,40 @@
 			{{ form_widget(form.modified) }}
 			{{ form_end(form) }}
 		</div>
-		<!-- Profile -->
+		<!-- Profile end -->
+
+		<!-- Favoris start -->
 		<div
-			class="tab-pane fade" id="favoris-tab-pane" role="tabpanel" aria-labelledby="favoris-tab" tabindex="0">{# Favoris #}
+			class="tab-pane fade" id="favoris-tab-pane" role="tabpanel" aria-labelledby="favoris-tab" tabindex="0">
+			{# Favoris #}
+			<div class="row">
+				{% for favori in app.user.favoris %}
+					{% set livre = favori.livre %}
+					<div class="col-12 col-md-3 col-lg-2 d-flex align-items-stretch parent-card">
+						<div class="card">
+							{% if livre.images|length > 0 %}
+								{% set image = livre.images[0].imageName %}
+							{% else %}
+								{% set image = "default.webp" %}
+							{% endif %}
+							<img src="{{ asset('images/livre/' ~ image) }}" class="card-img-top" alt="{{ livre.title }}">
+							<div class="card-body d-flex flex-wrap">
+								<h5 class="card-title">{{ livre.title }}</h5>
+								<div class="align-self-end w-100">
+									<p class="card-text">{{ livre.price|format_currency('EUR') }}</p>
+									<div class="d-flex flex-wrap justify-content-between w-100">
+										<a href="{{ path('app_front_livre', {slug: livre.slug}) }}" class="btn btn-dark">See</a>
+										<button class="btn btn-dark add-favori from-user-profil" data-livre-id="{{ livre.id }}">
+											<i class="fa-solid fa-heart"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
 
 		</div>
+		<!-- Favoris end -->
 	{% endblock %}
