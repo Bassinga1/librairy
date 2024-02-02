@@ -67,6 +67,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Favori::class, orphanRemoval: true)]
     private Collection $favoris;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $secretIv = null;
+
     public function __construct()
     {
         $this->favoris = new ArrayCollection();
@@ -315,6 +318,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $favori->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSecretIv(): ?string
+    {
+        return $this->secretIv;
+    }
+
+    public function setSecretIv(?string $secretIv): static
+    {
+        $this->secretIv = $secretIv;
 
         return $this;
     }

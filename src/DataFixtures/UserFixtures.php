@@ -27,17 +27,21 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
     public function load(ObjectManager $manager): void
     {
         $user = new User();
+        $user->setName('Bass');
+        $user->setLastname('Prin');
         $user->setEmail('prince.bass02@gmail.com');
         $user->setRoles(["ROLE_USER", "ROLE_ADMIN"]);
         $user->setPassword($this->encoder->hashPassword($user, "orvalha"));
-        $user->setIsActive(true);
+        $user->setIsVerified(true);
         $manager->persist($user);
 
         $user = new User();
+        $user->setName('Ben');
+        $user->setLastname('Prib');
         $user->setEmail('pribenis@gmail.com');
         $user->setRoles(["ROLE_USER"]);
         $user->setPassword($this->encoder->hashPassword($user, "orvalha1"));
-        $user->setIsActive(true);
+        $user->setIsVerified(true);
         $manager->persist($user);
 
         $manager->flush();
