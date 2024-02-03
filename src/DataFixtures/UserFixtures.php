@@ -28,7 +28,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
     {
         $user = new User();
         $user->setName('Bass');
-        $user->setLastname('Prin');
+        $user->setLastname('Prince');
         $user->setEmail('prince.bass02@gmail.com');
         $user->setRoles(["ROLE_USER", "ROLE_ADMIN"]);
         $user->setPassword($this->encoder->hashPassword($user, "orvalha"));
@@ -36,7 +36,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         $manager->persist($user);
 
         $user = new User();
-        $user->setName('Ben');
+        $user->setName('Benis');
         $user->setLastname('Prib');
         $user->setEmail('pribenis@gmail.com');
         $user->setRoles(["ROLE_USER"]);
