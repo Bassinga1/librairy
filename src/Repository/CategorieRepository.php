@@ -22,19 +22,20 @@ class CategorieRepository extends ServiceEntityRepository
     }
 
     /**
-    * @return Categorie[] Returns an array of Categorie objects
+    * @return Categorie[] Returns an array of Categorie objects DQL=Doctrine Query Language
     */
-    public function findBySearch($value): array
+    public function findBySearch($slug, $value): ?Categorie
     {
         return $this->createQueryBuilder('c')
+            ->select('c', 'l')
+            ->leftJoin('c.livres', 'l')
             ->andWhere('c.slug = :val')
-            ->join('c.livres', 'l')
             ->andWhere('l.title LIKE :val2')
             ->setParameter('val', $slug)
             ->setParameter('val2', '%' . $value . '%')
             ->orderBy('l.title', 'ASC')
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
     }
 
 //    public function findOneBySomeField($value): ?Categorie

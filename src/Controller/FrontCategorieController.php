@@ -32,7 +32,7 @@ class FrontCategorieController extends AbstractController
         }else{
             if(!is_null($request->request->get('search'))){
                 // dd($request->request->get('search'));
-                $categorie = $categorieRepository->findOneBy(["slug"=>$slug]);
+                $categorie = $categorieRepository->findBySearch($slug, $request->request->get('search'));
             }else{
                 $categorie = $categorieRepository->findOneBy(["slug"=>$slug]);
             }
